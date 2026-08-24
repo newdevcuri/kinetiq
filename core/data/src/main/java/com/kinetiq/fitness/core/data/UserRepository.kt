@@ -10,6 +10,20 @@ class UserRepository(private val userDao: UserDao) {
     fun getUserProfileFlow(): Flow<UserProfile?> {
         return userDao.getUserFlow().map { entity ->
             entity?.let {
+                val parsedEquipment = it.equipmentInventoryJson
+                    .removeSurrounding("[", "]")
+                    .replace("\"", "")
+                    .split(",")
+                    .map { s -> s.trim() }
+                    .filter { s -> s.isNotEmpty() }
+
+                val parsedInjuries = it.injuryTagsJson
+                    .removeSurrounding("[", "]")
+                    .replace("\"", "")
+                    .split(",")
+                    .map { s -> s.trim() }
+                    .filter { s -> s.isNotEmpty() }
+
                 UserProfile(
                     id = it.id,
                     heightCm = it.heightCm,
@@ -26,10 +40,10 @@ class UserRepository(private val userDao: UserDao) {
                     targetDurationSeconds = it.targetDurationSeconds,
                     targetDistanceMeters = it.targetDistanceMeters,
                     workoutLocation = WorkoutLocation.valueOf(it.workoutLocation),
-                    equipmentInventory = it.equipmentInventoryJson.removeSurrounding("[", "]").replace(""", "").split(",").map { s -> s.trim() }.filter { s -> s.isNotEmpty() },
+                    equipmentInventory = parsedEquipment,
                     parqPassed = it.parqPassed,
                     parqDateEpochMs = it.parqDateEpochMs,
-                    injuryTags = it.injuryTagsJson.removeSurrounding("[", "]").replace(""", "").split(",").map { s -> s.trim() }.filter { s -> s.isNotEmpty() },
+                    injuryTags = parsedInjuries,
                     experienceLevel = TrainingExperience.valueOf(it.experienceLevel),
                     preferredSplit = PreferredSplit.valueOf(it.preferredSplit),
                     createdAtEpochMs = it.createdAtEpochMs
@@ -39,6 +53,9 @@ class UserRepository(private val userDao: UserDao) {
     }
 
     suspend fun saveUserProfile(profile: UserProfile) {
+        val equipJson = profile.equipmentInventory.joinToString(prefix = "[", postfix = "]", separator = ",") { "\"$it\"" }
+        val injuryJson = profile.injuryTags.joinToString(prefix = "[", postfix = "]", separator = ",") { "\"$it\"" }
+
         val entity = UserEntity(
             id = profile.id,
             heightCm = profile.heightCm,
@@ -55,10 +72,10 @@ class UserRepository(private val userDao: UserDao) {
             targetDurationSeconds = profile.targetDurationSeconds,
             targetDistanceMeters = profile.targetDistanceMeters,
             workoutLocation = profile.workoutLocation.name,
-            equipmentInventoryJson = profile.equipmentInventory.joinToString(prefix = "[", postfix = "]", separator = ",") { "\"$it\"" },
+            equipmentInventoryJson = equipJson,
             parqPassed = profile.parqPassed,
             parqDateEpochMs = profile.parqDateEpochMs,
-            injuryTagsJson = profile.injuryTags.joinToString(prefix = "[", postfix = "]", separator = ",") { "\"$it\"" },
+            injuryTagsJson = injuryJson,
             experienceLevel = profile.experienceLevel.name,
             preferredSplit = profile.preferredSplit.name,
             createdAtEpochMs = profile.createdAtEpochMs
