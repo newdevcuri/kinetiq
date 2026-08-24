@@ -1,0 +1,26 @@
+KINETIQ EXERCISE SEED DATABASE INDEX
+Generated: 2026-08-24 | SHA256: 7bfcd672ac17648b86a6137d4cc267ca012d6eb77233fd0fb85711a6e00d7df5
+Total Exercises: 20 | Substitutions: 7 | Form Cues: 6
+
+ID                         | TIER | CATEGORY | PATTERN          | EQUIPMENT        | NAME
+--------------------------------------------------------------------------------------------------------------
+ex_bodyweight_squat        | T1   | STRENGTH | SQUAT            | BODYWEIGHT       | Bodyweight Air Squat
+ex_glute_bridge            | T1   | STRENGTH | HINGE            | BODYWEIGHT       | Bodyweight Glute Bridge
+ex_deadbug                 | T1   | MOBILITY | CORE             | BODYWEIGHT       | Deadbug
+ex_db_bicep_curl           | T1   | STRENGTH | ISOLATION        | DUMBBELL         | Dumbbell Bicep Curl
+ex_goblet_squat            | T1   | STRENGTH | SQUAT            | DUMBBELL         | Dumbbell Goblet Squat
+ex_lateral_raise_db        | T1   | STRENGTH | ISOLATION        | DUMBBELL         | Dumbbell Lateral Raise
+ex_overhead_tricep_ext     | T1   | STRENGTH | ISOLATION        | DUMBBELL         | Dumbbell Overhead Triceps Extension
+ex_plank                   | T1   | STRENGTH | CORE             | BODYWEIGHT       | Front Forearm Plank
+ex_incline_push_up         | T1   | STRENGTH | HORIZONTAL_PUSH  | BENCH            | Incline Push-Up (Bench/Elevation)
+ex_jumping_jacks           | T1   | CARDIO   | CARDIO_INTERVAL  | BODYWEIGHT       | Jumping Jacks (Interval Cardio)
+ex_band_pull_apart         | T1   | MOBILITY | HORIZONTAL_PULL  | RESISTANCE_BAND  | Resistance Band Pull-Apart
+ex_dumbbell_row            | T1   | STRENGTH | HORIZONTAL_PULL  | DUMBBELL         | Single-Arm Dumbbell Row
+ex_push_up                 | T1   | STRENGTH | HORIZONTAL_PUSH  | BODYWEIGHT       | Standard Push-Up
+ex_db_floor_press          | T2   | STRENGTH | HORIZONTAL_PUSH  | DUMBBELL         | Dumbbell Floor Press
+ex_reverse_lunge           | T2   | STRENGTH | LUNGE            | DUMBBELL         | Dumbbell Reverse Lunge
+ex_romanian_deadlift_db    | T2   | STRENGTH | HINGE            | DUMBBELL         | Dumbbell Romanian Deadlift (RDL)
+ex_high_knees              | T2   | CARDIO   | CARDIO_INTERVAL  | BODYWEIGHT       | High Knees Running in Place
+ex_mountain_climbers       | T2   | CARDIO   | CARDIO_INTERVAL  | BODYWEIGHT       | Mountain Climbers
+ex_db_overhead_press       | T2   | STRENGTH | VERTICAL_PUSH    | DUMBBELL         | Seated Dumbbell Overhead Press
+ex_pull_up                 | T3   | STRENGTH | VERTICAL_PULL    | PULL_UP_BAR      | Overhand Pull-Up

@@ -1,0 +1,14 @@
+{
+  "dataset_name": "kinetiq_prepackaged_exercises",
+  "version": "1.0.0",
+  "generated_date": "2026-08-24",
+  "file_name": "prepackaged_exercises.db",
+  "sha256_checksum": "7bfcd672ac17648b86a6137d4cc267ca012d6eb77233fd0fb85711a6e00d7df5",
+  "file_size_bytes": 45056,
+  "metrics": {
+    "exercise_count": 20,
+    "substitution_count": 7,
+    "form_cues_srs_count": 6
+  },
+  "license_summary": "CC BY-SA 4.0 (Wger) / CC BY 4.0 (ExerciseDB) / Proprietary Kinetiq Safety Enhancements"
+}
