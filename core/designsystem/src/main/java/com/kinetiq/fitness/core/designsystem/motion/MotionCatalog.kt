@@ -56,7 +56,12 @@ object MotionCatalog {
     // Primary: slideInVertically + expandVertically spring. Fallback: Instant visibility toggle.
     fun timerDropdownTransition(reduceMotion: Boolean): EnterTransition =
         if (reduceMotion) fadeIn(animationSpec = snap())
-        else slideInVertically(animationSpec = KinetiqMotion.DefaultSpring) + expandVertically()
+        else slideInVertically(
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioNoBouncy,
+                stiffness = Spring.StiffnessMedium
+            )
+        ) + expandVertically()
 
     // 10. Shimmer Loading Skeletons
     // Primary: Translating linear gradient brush on #1C1C1E. Fallback: Static #1C1C1E placeholder.
