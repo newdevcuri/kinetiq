@@ -1,18 +1,22 @@
 package com.kinetiq.fitness.core.designsystem.motion
 
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.SpringSpec
 import androidx.compose.animation.core.spring
 
 object KinetiqMotion {
-    // App-wide restrained default spring (PRD §27 / Build Spec §5)
-    val DefaultSpring = spring<Float>(
+    val DefaultSpring: SpringSpec<Float> = spring(
         dampingRatio = Spring.DampingRatioNoBouncy,
         stiffness = Spring.StiffnessMedium
     )
 
-    // Explicit sanctioned exception for Checkmark Morph & Elastic FAB Pop (Build Spec §5b #6, #7, DEC-003)
-    val BouncyTactileSpring = spring<Float>(
+    val BouncyTactileSpring: SpringSpec<Float> = spring(
         dampingRatio = Spring.DampingRatioMediumBouncy,
         stiffness = Spring.StiffnessMediumLow
+    )
+
+    fun <T> defaultSpring() = spring<T>(
+        dampingRatio = Spring.DampingRatioNoBouncy,
+        stiffness = Spring.StiffnessMedium
     )
 }
