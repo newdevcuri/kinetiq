@@ -1,4 +1,90 @@
-[versions]
+import os
+
+target_dir = "/working_dir/c_4f0cf643cbef2d9c"
+
+def write_file(rel_path, content):
+    full_path = os.path.join(target_dir, rel_path)
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    with open(full_path, "w") as f:
+        f.write(content.strip() + "\n")
+    print(f"Updated: {rel_path}")
+
+# 1. Root build.gradle.kts
+write_file("build.gradle.kts", """plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
+}
+""")
+
+# 2. app/build.gradle.kts
+write_file("app/build.gradle.kts", """plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+}
+
+android {
+    namespace = "com.kinetiq.fitness"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.kinetiq.fitness"
+        minSdk = 28
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        debug {
+            isMinifyEnabled = false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+    buildFeatures {
+        compose = true
+    }
+}
+
+dependencies {
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:database"))
+    implementation(project(":core:model"))
+    implementation(project(":core:data"))
+    implementation(project(":core:engine"))
+    implementation(project(":core:healthconnect"))
+    implementation(project(":feature:onboarding"))
+    implementation(project(":feature:dashboard"))
+    implementation(project(":feature:train"))
+    implementation(project(":feature:workout"))
+    implementation(project(":feature:library"))
+    implementation(project(":feature:progress"))
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+}
+""")
+
+# 3. libs.versions.toml
+write_file("gradle/libs.versions.toml", """[versions]
 agp = "8.5.2"
 kotlin = "2.0.20"
 compose-bom = "2024.09.00"
@@ -74,3 +160,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+""")
+
+print("Gradle files fixed.")

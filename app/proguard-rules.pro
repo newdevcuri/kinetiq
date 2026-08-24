@@ -1,3 +1,7 @@
-# Kinetiq ProGuard/R8 rules
--keepattributes *Annotation*, InnerClasses, Signature
--dontwarn org.slf4j.**
+# Kinetiq Proguard Rules
+-keepattributes *Annotation*
+-keepclassmembers class * {
+    @androidx.room.Dao *;
+    @androidx.room.Database *;
+    @androidx.room.Entity *;
+}

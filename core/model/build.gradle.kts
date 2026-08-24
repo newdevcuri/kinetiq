@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.kinetiq.fitness.core.model"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 28
@@ -19,6 +20,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+    buildFeatures {
+        compose = true
     }
 }
 
